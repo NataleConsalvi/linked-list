@@ -145,9 +145,7 @@ const char* nats::pop(LinkedList* ll){
 
 }
 
-
-    /** Appends label to the end of the list.
-    */                
+               
 void nats::append(LinkedList* ll, const char* label){  
     debug(string("aggiunta elemento in fondo: ") + label);
     int i = nats::size(ll);
