@@ -126,3 +126,41 @@ TEST_CASE("Verifica eliminazione in coda (pop)", "[linked_list]") {
     REQUIRE(s == "u, o");
 
 }
+
+TEST_CASE("Verifica aggiunta in fondo (append)", "[linked_list]") {
+    
+    nats::LinkedList* ll = nats::init();
+
+    nats::append(ll,"e");
+
+    REQUIRE(ll->head->label == "e");
+
+    nats::add(ll, "v");
+    nats::add(ll, "o");
+    nats::add(ll, "u");
+
+    nats::append(ll,"a");
+
+    string s = nats::to_string(ll);
+    REQUIRE(s == "u, o, v, e, a");
+
+}
+
+TEST_CASE("Verifica rimozione di un label (remove)", "[linked_list]") {
+    
+    nats::LinkedList* ll = nats::init();
+
+    REQUIRE_THROWS_AS( nats::remove(ll, "s"), std::invalid_argument);
+
+    nats::add(ll, "v");
+    nats::add(ll, "o");
+    nats::add(ll, "u");
+
+    REQUIRE_THROWS_AS( nats::remove(ll, "s"), std::invalid_argument);
+
+    nats::remove(ll,"o");
+
+    string s = nats::to_string(ll);
+    REQUIRE(s == "u, v");
+
+}
